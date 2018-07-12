@@ -8,3 +8,21 @@ sudo chmod +x /usr/local/bin/docker-compose
 
 ls -l /var/run/docker.sock
 sudo chmod 666 /var/run/docker.sock
+
+
+Quick reference for the elastic installation
+--------------------
+docker image ls
+docker images -f dangling=true
+docker rmi docker images -f dangling=true
+docker stop $(docker ps -a -q)
+docker kill $(docker ps -a -q)
+docker rmi $(docker images -a -q) -f 
+docker rm $(docker ps -a -f status=exited -q)
+
+docker run -it --rm docker.elastic.co/elasticsearch/elasticsearch:6.3.1 bash
+for i in `seq 10`;do curl localhost;done
+sudo sysctl -w vm.max_map_count=262144
+docker ps -a --format "{{.Names}} {{.Ports}}"|column -t
+sudo yum install net-tools -y
+netstat -ant
